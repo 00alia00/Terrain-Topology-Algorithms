@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Unity.Mathematics;
+
 using UnityEngine;
 
 namespace TerrainTopology
@@ -21,7 +21,7 @@ namespace TerrainTopology
             {
                 for (int x = 0; x < m_width; x++)
                 {
-                    Vector2 d1 = GetFirstDerivative(x, y);
+                    float2 d1 = GetFirstDerivative(x, y);
 
                     float slope = Slope(d1.x, d1.y);
 
@@ -41,7 +41,7 @@ namespace TerrainTopology
             float p = zx * zx + zy * zy;
             float g = FMath.SafeSqrt(p);
 
-            return Mathf.Atan(g) * FMath.Rad2Deg / 90.0f;
+            return math.atan(g) * FMath.Rad2Deg / 90.0f;
         }
 
     }

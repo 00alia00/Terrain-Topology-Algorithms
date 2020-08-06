@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Unity.Mathematics;
 using UnityEngine;
 
 namespace TerrainTopology
@@ -42,8 +41,8 @@ namespace TerrainTopology
             {
                 for (int x = 0; x < m_width; x++)
                 {
-                    Vector2 d1;
-                    Vector3 d2;
+                    float2 d1;
+                    float3 d2;
                     GetDerivatives(x, y, out d1, out d2);
 
                     float curvature = 0;
@@ -143,7 +142,7 @@ namespace TerrainTopology
             float p = zx2 + zy2;
 
             float n = zy2 * zxx - 2.0f * zxy * zx * zy + zx2 * zyy;
-            float d = Mathf.Pow(p, 1.5f);
+            float d = math.pow(p, 1.5f);
 
             return FMath.SafeDiv(n, d);
         }
@@ -161,7 +160,7 @@ namespace TerrainTopology
             float p = zx2 + zy2;
 
             float n = zy2 * zxx - 2.0f * zxy * zx * zy + zx2 * zyy;
-            float d = p * Mathf.Pow(p + 1, 0.5f);
+            float d = p * math.pow(p + 1, 0.5f);
 
             return FMath.SafeDiv(n, d);
         }
@@ -179,7 +178,7 @@ namespace TerrainTopology
             float p = zx2 + zy2;
 
             float n = zx2 * zxx + 2.0f * zxy * zx * zy + zy2 * zyy;
-            float d = p * Mathf.Pow(p + 1, 1.5f);
+            float d = p * math.pow(p + 1, 1.5f);
 
             return FMath.SafeDiv(n, d);
         }
@@ -195,7 +194,7 @@ namespace TerrainTopology
             float p = zx2 + zy2;
 
             float n = (1 + zy2) * zxx - 2.0f * zxy * zx * zy + (1 + zx2) * zyy;
-            float d = 2 * Mathf.Pow(p + 1, 1.5f);
+            float d = 2 * math.pow(p + 1, 1.5f);
 
             return FMath.SafeDiv(n, d);
         }
@@ -212,7 +211,7 @@ namespace TerrainTopology
             float p = zx2 + zy2;
 
             float n = zxx * zyy - zxy * zxy;
-            float d = Mathf.Pow(p + 1, 2f);
+            float d = math.pow(p + 1, 2f);
 
             return FMath.SafeDiv(n, d);
         }
@@ -265,7 +264,7 @@ namespace TerrainTopology
             float p = zx2 + zy2;
 
             float n = (zx2 - zy2) * zxy - zx * zy * (zxx - zyy);
-            float d = Mathf.Pow(p, 1.5f);
+            float d = math.pow(p, 1.5f);
 
             return FMath.SafeDiv(n, d);
         }

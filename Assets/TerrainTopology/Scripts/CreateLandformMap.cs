@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Unity.Mathematics;
 using UnityEngine;
 
 namespace TerrainTopology
@@ -39,8 +38,8 @@ namespace TerrainTopology
             {
                 for (int x = 0; x < m_width; x++)
                 {
-                    Vector2 d1;
-                    Vector3 d2;
+                    float2 d1;
+                    float3 d2;
                     GetDerivatives(x, y, out d1, out d2);
 
                     float landform = 0;
@@ -121,7 +120,7 @@ namespace TerrainTopology
 
             float d = FMath.SafeSqrt(H * H - K);
 
-            float si = 2.0f / Mathf.PI * Mathf.Atan(FMath.SafeDiv(H, d));
+            float si = 2.0f / math.PI * math.atan(FMath.SafeDiv(H, d));
 
             return si * 0.5f + 0.5f;
         }
@@ -176,7 +175,7 @@ namespace TerrainTopology
             float p = zx2 + zy2;
 
             float n = zy2 * zxx - 2.0f * zxy * zx * zy + zx2 * zyy;
-            float d = p * Mathf.Pow(p + 1, 0.5f);
+            float d = p * math.pow(p + 1, 0.5f);
 
             return FMath.SafeDiv(n, d);
         }
@@ -194,7 +193,7 @@ namespace TerrainTopology
             float p = zx2 + zy2;
 
             float n = zx2 * zxx + 2.0f * zxy * zx * zy + zy2 * zyy;
-            float d = p * Mathf.Pow(p + 1, 1.5f);
+            float d = p * math.pow(p + 1, 1.5f);
 
             return FMath.SafeDiv(n, d);
         }
@@ -210,7 +209,7 @@ namespace TerrainTopology
             float p = zx2 + zy2;
 
             float n = (1 + zy2) * zxx - 2.0f * zxy * zx * zy + (1 + zx2) * zyy;
-            float d = 2 * Mathf.Pow(p + 1, 1.5f);
+            float d = 2 * math.pow(p + 1, 1.5f);
 
             return FMath.SafeDiv(n, d);
         }
@@ -227,7 +226,7 @@ namespace TerrainTopology
             float p = zx2 + zy2;
 
             float n = zxx * zyy - zxy * zxy;
-            float d = Mathf.Pow(p + 1, 2);
+            float d = math.pow(p + 1, 2);
 
             return FMath.SafeDiv(n, d);
         }

@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace TerrainTopology
@@ -22,7 +22,7 @@ namespace TerrainTopology
             {
                 for (int x = 0; x < m_width; x++)
                 {
-                    Vector2 d1 = GetFirstDerivative(x, y);
+                    float2 d1 = GetFirstDerivative(x, y);
 
                     float aspect = (float)Aspect(d1.x, d1.y);
 
@@ -42,7 +42,7 @@ namespace TerrainTopology
             float gyx = FMath.SafeDiv(zy, zx);
             float gxx = FMath.SafeDiv(zx, Math.Abs(zx));
 
-            float aspect = 180 - Mathf.Atan(gyx) * FMath.Rad2Deg + 90 * gxx;
+            float aspect = 180 - math.atan(gyx) * FMath.Rad2Deg + 90 * gxx;
             aspect /= 360;
 
             return aspect;

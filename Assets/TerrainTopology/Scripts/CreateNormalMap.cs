@@ -1,5 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Unity.Mathematics;
+
 using UnityEngine;
 
 namespace TerrainTopology
@@ -18,17 +18,17 @@ namespace TerrainTopology
             {
                 for (int x = 0; x < m_width; x++)
                 {
-                    Vector2 d1 = GetFirstDerivative(x, y);
+                    float2 d1 = GetFirstDerivative(x, y);
 
                     //Not to sure of the orientation.
                     //Might need to flip x or y
 
-                    var n = new Vector3();
+                    var n = new float3();
                     n.x = d1.x * 0.5f + 0.5f;
                     n.y = -d1.y * 0.5f + 0.5f; 
                     n.z = 1.0f;
 
-                    n.Normalize();
+                    n = math.normalize(n);
 
                     normalMap.SetPixel(x, y, new Color(n.x, n.y, n.z, 1));
                 }

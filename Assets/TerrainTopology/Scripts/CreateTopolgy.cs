@@ -1,8 +1,5 @@
-﻿
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using Unity.Mathematics;
 
 namespace TerrainTopology
 {
@@ -136,8 +133,8 @@ namespace TerrainTopology
         /// <returns></returns>
         protected float GetNormalizedHeight(int x, int y)
         {
-            x = Mathf.Clamp(x, 0, m_width - 1);
-            y = Mathf.Clamp(y, 0, m_height - 1);
+            x = math.clamp(x, 0, m_width - 1);
+            y = math.clamp(y, 0, m_height - 1);
 
             return m_heights[x + y * m_width];
         }
@@ -159,7 +156,7 @@ namespace TerrainTopology
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <returns></returns>
-        protected Vector2 GetFirstDerivative(int x, int y)
+        protected float2 GetFirstDerivative(int x, int y)
         {
             float w = m_cellLength;
             float z1 = GetHeight(x - 1, y + 1);
@@ -175,7 +172,7 @@ namespace TerrainTopology
             float zx = (z3 + z6 + z9 - z1 - z4 - z7) / (6.0f * w);
             float zy = (z1 + z2 + z3 - z7 - z8 - z9) / (6.0f * w);
 
-            return new Vector2(-zx, -zy);
+            return new float2(-zx, -zy);
         }
 
         /// <summary>
@@ -185,7 +182,7 @@ namespace TerrainTopology
         /// <param name="y"></param>
         /// <param name="d1"></param>
         /// <param name="d2"></param>
-        protected void GetDerivatives(int x, int y, out Vector2 d1, out Vector3 d2)
+        protected void GetDerivatives(int x, int y, out float2 d1, out float3 d2)
         {
             float w = m_cellLength;
             float w2 = w * w;
@@ -208,8 +205,8 @@ namespace TerrainTopology
             float zyy = (z1 + z2 + z3 + z7 + z8 + z9 - 2.0f * (z4 + z5 + z6)) / (3.0f * w2);
             float zxy = (z3 + z7 - z1 - z9) / (4.0f * w2);
 
-            d1 = new Vector2(-zx, -zy);
-            d2 = new Vector3(-zxx, -zyy, -zxy); //is zxy or -zxy?
+            d1 = new float2(-zx, -zy);
+            d2 = new float3(-zxx, -zyy, -zxy); //is zxy or -zxy?
         }
 
         /// <summary>
@@ -270,8 +267,8 @@ namespace TerrainTopology
             if (exponent > 0)
             {
                 float sign = FMath.SignOrZero(v);
-                float pow = Mathf.Pow(10, exponent);
-                float log = Mathf.Log(1.0f + pow * Mathf.Abs(v));
+                float pow = math.pow(10, exponent);
+                float log = math.log(1.0f + pow * math.abs(v));
 
                 v = sign * log;
             }
