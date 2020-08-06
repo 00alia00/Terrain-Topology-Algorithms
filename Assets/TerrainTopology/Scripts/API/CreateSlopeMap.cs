@@ -1,10 +1,7 @@
 ﻿using Unity.Mathematics;
-using UnityEngine;
 
 namespace TerrainTopology
 {
-
-    [System.Serializable]
     public class CreateSlopeMap : CreateTopology
     {
         protected override bool OnChange()
@@ -12,18 +9,18 @@ namespace TerrainTopology
             return m_currentColorMode != m_coloredGradient;
         }
 
-        public override Color[] CreateMap()
+        public override float4[] CreateMap()
         {
-            Color[] map = new Color[m_width*m_height];
-            for (int y = 0; y < m_height; y++)
+            float4[] map = new float4[width * height];
+            for (int y = 0; y < height; y++)
             {
-                for (int x = 0; x < m_width; x++)
+                for (int x = 0; x < width; x++)
                 {
                     float2 d1 = GetFirstDerivative(x, y);
 
                     float slope = Slope(d1.x, d1.y);
 
-                    map[x+y*m_width] =  Colorize(slope, 0.4f, true);
+                    map[x + y * width] = Colorize(slope, 0.4f, true);
                 }
             }
 

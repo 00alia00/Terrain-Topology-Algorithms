@@ -1,20 +1,16 @@
 ﻿using Unity.Mathematics;
 
-using UnityEngine;
-
 namespace TerrainTopology
 {
-
-    [System.Serializable]
     public class CreateNormalMap : CreateTopology
     {
-        public override Color[] CreateMap()
+        public override float4[] CreateMap()
         {
-            Color[] map = new Color[m_width * m_height];
+            float4[] map = new float4[width * height];
 
-            for (int y = 0; y < m_height; y++)
+            for (int y = 0; y < height; y++)
             {
-                for (int x = 0; x < m_width; x++)
+                for (int x = 0; x < width; x++)
                 {
                     float2 d1 = GetFirstDerivative(x, y);
 
@@ -28,7 +24,7 @@ namespace TerrainTopology
 
                     n = math.normalize(n);
 
-                    map[x + y * m_width] = new Color(n.x, n.y, n.z, 1);
+                    map[x + y * width] = new float4(n.x, n.y, n.z, 1);
                 }
             }
 

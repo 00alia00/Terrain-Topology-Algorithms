@@ -1,17 +1,9 @@
-﻿using System.Collections;
-
-using System.Collections.Generic;
-
-using UnityEngine;
-
-
+﻿using Unity.Mathematics;
 
 namespace TerrainTopology
 {
-    [System.Serializable]
     public class CreateFlowMap : CreateTopology
     {
-
         private const int LEFT = 0;
         private const int RIGHT = 1;
         private const int BOTTOM = 2;
@@ -21,33 +13,32 @@ namespace TerrainTopology
 
         public int m_iterations = 5;
 
-        public override Color[] CreateMap()
+        public override float4[] CreateMap()
         {
+            float[,] waterMap = new float[width, height];
+            float[,,] outFlow = new float[width, height, 4];
 
-            float[,] waterMap = new float[m_width, m_height];
-            float[,,] outFlow = new float[m_width, m_height, 4];
-
-            FillWaterMap(0.0001f, waterMap, m_width, m_height);
+            FillWaterMap(0.0001f, waterMap, width, height);
 
             for(int i = 0; i < m_iterations; i++)
             {
-                ComputeOutflow(waterMap, outFlow, m_heights, m_width, m_height);
-                UpdateWaterMap(waterMap, outFlow, m_width, m_height);
+                ComputeOutflow(waterMap, outFlow, heights, width, height);
+                UpdateWaterMap(waterMap, outFlow, width, height);
             }
 
-            float[,] velocityMap = new float[m_width, m_height];
+            float[,] velocityMap = new float[width, height];
 
-            CalculateVelocityField(velocityMap, outFlow, m_width, m_height);
-            NormalizeMap(velocityMap, m_width, m_height);
+            CalculateVelocityField(velocityMap, outFlow, width, height);
+            NormalizeMap(velocityMap, width, height);
 
-            Color[] map = new Color[m_width * m_height];
+            float4[] map = new float4[width * height];
 
-            for (int y = 0; y < m_height; y++)
+            for (int y = 0; y < height; y++)
             {
-                for (int x = 0; x < m_width; x++)
+                for (int x = 0; x < width; x++)
                 {
                     float v = velocityMap[x, y];
-                    map[x + y * m_width] = new Color(v, v, v, 1);
+                    map[x + y * width] = new float4(v, v, v, 1);
                 }
             }
 
@@ -96,10 +87,10 @@ namespace TerrainTopology
                     float diff3 = (waterHt + landHt) - (waterHts3 + landHts3);
 
                     //out flow is previous flow plus flow for this time step.
-                    float flow0 = Mathf.Max(0, outFlow[x, y, 0] + diff0);
-                    float flow1 = Mathf.Max(0, outFlow[x, y, 1] + diff1);
-                    float flow2 = Mathf.Max(0, outFlow[x, y, 2] + diff2);
-                    float flow3 = Mathf.Max(0, outFlow[x, y, 3] + diff3);
+                    float flow0 = math.max(0, outFlow[x, y, 0] + diff0);
+                    float flow1 = math.max(0, outFlow[x, y, 1] + diff1);
+                    float flow2 = math.max(0, outFlow[x, y, 2] + diff2);
+                    float flow3 = math.max(0, outFlow[x, y, 3] + diff3);
 
                     float sum = flow0 + flow1 + flow2 + flow3;
 
@@ -174,7 +165,7 @@ namespace TerrainTopology
                     float vx = (dl + dr) * 0.5f;
                     float vy = (db + dt) * 0.5f;
 
-                    velocityMap[x, y] = Mathf.Sqrt(vx * vx + vy * vy);
+                    velocityMap[x, y] = math.sqrt(vx * vx + vy * vy);
                 }
 
             }

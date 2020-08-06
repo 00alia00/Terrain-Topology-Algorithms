@@ -1,13 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
+using Unity.Mathematics;
 
 namespace TerrainTopology
 {
-
     public enum RESIDUAL_TYPE { ELEVATION, MEAN, DIFFERENCE, STDEV, DEVIATION, PERCENTILE };
 
-    [System.Serializable]
     public class CreateResidualMap : CreateTopology
     {
 
@@ -22,17 +19,17 @@ namespace TerrainTopology
             return m_currentType != m_residualType || m_currentColorMode != m_coloredGradient;
         }
 
-        public override Color[] CreateMap()
+        public override float4[] CreateMap()
         {
             m_currentType = m_residualType;
 
-            Color[] map = new Color[m_width * m_height];
+            float4[] map = new float4[width * height];
 
             var elevations = new List<float>();
 
-            for (int y = 0; y < m_height; y++)
+            for (int y = 0; y < height; y++)
             {
-                for (int x = 0; x < m_width; x++)
+                for (int x = 0; x < width; x++)
                 {
                     elevations.Clear();
 
@@ -43,8 +40,8 @@ namespace TerrainTopology
                             int xi = x + i;
                             int yj = y + j;
 
-                            if (xi < 0 || xi >= m_width) continue;
-                            if (yj < 0 || yj >= m_height) continue;
+                            if (xi < 0 || xi >= width) continue;
+                            if (yj < 0 || yj >= height) continue;
 
                             float h = GetNormalizedHeight(xi, yj);
                             elevations.Add(h);
@@ -53,7 +50,7 @@ namespace TerrainTopology
 
                     float residual = 0;
                     float h0 = GetNormalizedHeight(x, y);
-                    Color color = Color.white;
+                    float4 color = white;
 
                     switch (m_residualType)
                     {
@@ -89,7 +86,7 @@ namespace TerrainTopology
                     }
 
 
-                    map[x + y * m_width] = color;
+                    map[x + y * width] = color;
                 }
 
             }
@@ -105,7 +102,7 @@ namespace TerrainTopology
         private float StdevElevation(List<float> elevations)
         {
             var mean = MeanElevation(elevations);
-            return Mathf.Sqrt(Variance(elevations, mean));
+            return math.sqrt(Variance(elevations, mean));
         }
 
         private float DifferenceFromMeanElevation(float h, List<float> elevations)

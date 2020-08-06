@@ -1,14 +1,11 @@
 ﻿using Unity.Mathematics;
-using UnityEngine;
 
 namespace TerrainTopology
 {
     public enum LANDFORM_TYPE { GAUSSIAN, SHAPE_INDEX, ACCUMULATION };
 
-    [System.Serializable]
     public class CreateLandformMap : CreateTopology
     {
-
         public LANDFORM_TYPE m_landformType = LANDFORM_TYPE.GAUSSIAN;
 
         private LANDFORM_TYPE m_currentType;
@@ -28,22 +25,22 @@ namespace TerrainTopology
             return true;
         }
 
-        public override Color[] CreateMap()
+        public override float4[] CreateMap()
         {
             m_currentType = m_landformType;
 
-            Color[] map = new Color[m_width * m_height];
+            float4[] map = new float4[width * height];
 
-            for (int y = 0; y < m_height; y++)
+            for (int y = 0; y < height; y++)
             {
-                for (int x = 0; x < m_width; x++)
+                for (int x = 0; x < width; x++)
                 {
                     float2 d1;
                     float3 d2;
                     GetDerivatives(x, y, out d1, out d2);
 
                     float landform = 0;
-                    Color color = Color.white;
+                    float4 color = white;
 
                     switch (m_landformType)
                     {
@@ -63,7 +60,7 @@ namespace TerrainTopology
                             break;
                     };
 
-                    map[x + y * m_width] = color;
+                    map[x + y * width] = color;
                 }
             }
 
