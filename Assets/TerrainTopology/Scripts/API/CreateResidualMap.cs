@@ -7,6 +7,7 @@ namespace TerrainTopology
 
     public enum RESIDUAL_TYPE { ELEVATION, MEAN, DIFFERENCE, STDEV, DEVIATION, PERCENTILE };
 
+    [System.Serializable]
     public class CreateResidualMap : CreateTopology
     {
 
@@ -21,11 +22,11 @@ namespace TerrainTopology
             return m_currentType != m_residualType || m_currentColorMode != m_coloredGradient;
         }
 
-        protected override void CreateMap()
+        public override Color[] CreateMap()
         {
             m_currentType = m_residualType;
 
-            Texture2D residualMap = new Texture2D(m_width, m_height);
+            Color[] map = new Color[m_width * m_height];
 
             var elevations = new List<float>();
 
@@ -88,13 +89,12 @@ namespace TerrainTopology
                     }
 
 
-                    residualMap.SetPixel(x, y, color);
+                    map[x + y * m_width] = color;
                 }
 
             }
 
-            residualMap.Apply();
-            m_material.mainTexture = residualMap;
+            return map;
         }
 
         private float MeanElevation(List<float> elevations)

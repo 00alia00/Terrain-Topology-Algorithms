@@ -94,8 +94,9 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaDirect: 0.5
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
-    m_ShowResolutionOverlay: 1
     m_ExportTrainingData: 0
+    m_TrainingDataDestination: TrainingData
+    m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
   m_UseShadowmask: 0
 --- !u!196 &4
@@ -127,13 +128,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 889774873}
     m_Modifications:
-    - target: {fileID: 100002, guid: bb0d2067794c39f4fb23e38abe1ba77a, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: bb0d2067794c39f4fb23e38abe1ba77a, type: 3}
       propertyPath: m_Name
       value: Terrain
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: bb0d2067794c39f4fb23e38abe1ba77a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: bb0d2067794c39f4fb23e38abe1ba77a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -189,7 +190,6 @@ GameObject:
   m_Component:
   - component: {fileID: 25582370}
   - component: {fileID: 25582369}
-  - component: {fileID: 25582368}
   - component: {fileID: 25582367}
   - component: {fileID: 25582366}
   m_Layer: 0
@@ -208,14 +208,6 @@ AudioListener:
   m_GameObject: {fileID: 25582365}
   m_Enabled: 1
 --- !u!124 &25582367
-Behaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 25582365}
-  m_Enabled: 1
---- !u!92 &25582368
 Behaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -287,13 +279,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 889774873}
     m_Modifications:
-    - target: {fileID: 100002, guid: 9c5243e4b20866c43abdf860d6e5ecad, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 9c5243e4b20866c43abdf860d6e5ecad, type: 3}
       propertyPath: m_Name
       value: Terrain
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 9c5243e4b20866c43abdf860d6e5ecad, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 9c5243e4b20866c43abdf860d6e5ecad, type: 3}
       propertyPath: m_LocalPosition.x
@@ -364,8 +356,9 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 602923835}
   m_Enabled: 1
-  serializedVersion: 9
+  serializedVersion: 10
   m_Type: 1
+  m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
   m_Range: 10
@@ -459,9 +452,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db44b94d1b2a44b4ca5117066bd1bd08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  coloredGradient: 1
   m_material: {fileID: 2100000, guid: 07cbe2b14c9584346ba4c3afc25c7587, type: 2}
-  m_coloredGradient: 1
-  m_residualType: 5
 --- !u!4 &889774873
 Transform:
   m_ObjectHideFlags: 0
@@ -487,13 +479,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 889774873}
     m_Modifications:
-    - target: {fileID: 100002, guid: 196f8e7b56cd92242a9ab123078fd583, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 196f8e7b56cd92242a9ab123078fd583, type: 3}
       propertyPath: m_Name
       value: Terrain
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 196f8e7b56cd92242a9ab123078fd583, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 196f8e7b56cd92242a9ab123078fd583, type: 3}
       propertyPath: m_LocalPosition.x
@@ -546,13 +538,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 889774873}
     m_Modifications:
-    - target: {fileID: 100002, guid: 96dbe757be8762147b3c874ce94b1a0a, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 96dbe757be8762147b3c874ce94b1a0a, type: 3}
       propertyPath: m_Name
       value: Terrain
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 96dbe757be8762147b3c874ce94b1a0a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 96dbe757be8762147b3c874ce94b1a0a, type: 3}
       propertyPath: m_LocalPosition.x

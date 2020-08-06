@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace TerrainTopology
 {
-
     public enum LANDFORM_TYPE { GAUSSIAN, SHAPE_INDEX, ACCUMULATION };
 
+    [System.Serializable]
     public class CreateLandformMap : CreateTopology
     {
 
@@ -28,11 +28,11 @@ namespace TerrainTopology
             return true;
         }
 
-        protected override void CreateMap()
+        public override Color[] CreateMap()
         {
             m_currentType = m_landformType;
 
-            Texture2D landformMap = new Texture2D(m_width, m_height);
+            Color[] map = new Color[m_width * m_height];
 
             for (int y = 0; y < m_height; y++)
             {
@@ -63,14 +63,11 @@ namespace TerrainTopology
                             break;
                     };
 
-
-                    landformMap.SetPixel(x, y, color);
+                    map[x + y * m_width] = color;
                 }
-
             }
 
-            landformMap.Apply();
-            m_material.mainTexture = landformMap;
+            return map;
         }
 
         /// <summary>

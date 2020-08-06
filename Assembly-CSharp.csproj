@@ -63,15 +63,23 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\TerrainTopology\Scripts\CreateAspectMap.cs" />
-    <Compile Include="Assets\TerrainTopology\Scripts\CreateCurvatureMap.cs" />
-    <Compile Include="Assets\TerrainTopology\Scripts\CreateFlowMap.cs" />
-    <Compile Include="Assets\TerrainTopology\Scripts\CreateLandformMap.cs" />
-    <Compile Include="Assets\TerrainTopology\Scripts\CreateNormalMap.cs" />
-    <Compile Include="Assets\TerrainTopology\Scripts\CreateResidualMap.cs" />
-    <Compile Include="Assets\TerrainTopology\Scripts\CreateSlopeMap.cs" />
-    <Compile Include="Assets\TerrainTopology\Scripts\CreateTopolgy.cs" />
-    <Compile Include="Assets\TerrainTopology\Scripts\FMath.cs" />
+    <Compile Include="Assets\TerrainTopology\Scripts\API\CreateAspectMap.cs" />
+    <Compile Include="Assets\TerrainTopology\Scripts\API\CreateCurvatureMap.cs" />
+    <Compile Include="Assets\TerrainTopology\Scripts\API\CreateFlowMap.cs" />
+    <Compile Include="Assets\TerrainTopology\Scripts\API\CreateLandformMap.cs" />
+    <Compile Include="Assets\TerrainTopology\Scripts\API\CreateNormalMap.cs" />
+    <Compile Include="Assets\TerrainTopology\Scripts\API\CreateResidualMap.cs" />
+    <Compile Include="Assets\TerrainTopology\Scripts\API\CreateSlopeMap.cs" />
+    <Compile Include="Assets\TerrainTopology\Scripts\API\CreateTopolgy.cs" />
+    <Compile Include="Assets\TerrainTopology\Scripts\API\FMath.cs" />
+    <Compile Include="Assets\TerrainTopology\Scripts\CreateAspectMapBehaviour.cs" />
+    <Compile Include="Assets\TerrainTopology\Scripts\CreateCurvatureMapBehaviour.cs" />
+    <Compile Include="Assets\TerrainTopology\Scripts\CreateFlowMapBehaviour.cs" />
+    <Compile Include="Assets\TerrainTopology\Scripts\CreateLandformMapBehaviour.cs" />
+    <Compile Include="Assets\TerrainTopology\Scripts\CreateNormalMapBehaviour.cs" />
+    <Compile Include="Assets\TerrainTopology\Scripts\CreateResidualMapBehaviour.cs" />
+    <Compile Include="Assets\TerrainTopology\Scripts\CreateSlopeMapBehaviour.cs" />
+    <Compile Include="Assets\TerrainTopology\Scripts\CreateTopolgyBehaviour.cs" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
