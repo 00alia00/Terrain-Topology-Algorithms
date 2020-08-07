@@ -1,3 +1,6 @@
+This fork is intended to pull out the unity specific code so that these algos can be used without unity in a seperate EXE. It will still run in unity as a package. (WIP)
+-- Alia
+
 # Terrain-Topology-Algorithms
 
 This project is collection of algorithms that can be used to describe the topology of a terrain. The result of these algorithms can then be used for rendering the terrain or as input to other algorithms.
