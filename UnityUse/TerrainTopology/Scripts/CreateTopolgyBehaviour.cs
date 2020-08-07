@@ -5,7 +5,7 @@ namespace TerrainTopology
     public abstract class CreateTopologyBehaviour : MonoBehaviour
     {
         [SerializeField]
-        protected CreateTopology topology;
+        protected Topology topology;
 
         [SerializeField]
         protected bool coloredGradient;

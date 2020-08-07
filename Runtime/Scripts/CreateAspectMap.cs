@@ -3,7 +3,7 @@ using Unity.Mathematics;
 
 namespace TerrainTopology
 {
-    public class CreateAspectMap : CreateTopology
+    public class AspectMap : Topology
     {
         protected override bool OnChange()
         {

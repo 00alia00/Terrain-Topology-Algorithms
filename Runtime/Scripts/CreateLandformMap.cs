@@ -4,7 +4,7 @@ namespace TerrainTopology
 {
     public enum LANDFORM_TYPE { GAUSSIAN, SHAPE_INDEX, ACCUMULATION };
 
-    public class CreateLandformMap : CreateTopology
+    public class LandformMap : Topology
     {
         public LANDFORM_TYPE m_landformType = LANDFORM_TYPE.GAUSSIAN;
 

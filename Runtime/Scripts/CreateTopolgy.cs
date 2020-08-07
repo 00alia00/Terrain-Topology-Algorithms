@@ -1,10 +1,11 @@
-﻿using Unity.Mathematics;
+﻿using System;
+using Unity.Mathematics;
 
 namespace TerrainTopology
 {
     public enum VISUALIZE_GRADIENT { WARM, COOL, COOL_WARM, GREY_WHITE, GREY_BLACK, BLACK_WHITE };
 
-    public abstract class CreateTopology
+    public abstract class Topology
     {
         public static readonly float4 white = new float4(1);
         public static readonly float2 one = new float2(1);
@@ -16,24 +17,29 @@ namespace TerrainTopology
 
         protected bool m_currentColorMode;
 
-        public int width { get { return map.m_width; } }
-        public int height { get { return map.m_height; } }
-        public float[] heights { get { return map.m_heights; } }
+        public int width { get { return map.tex_width; } }
+        public int height { get { return map.tex_height; } }
+        public float[] heights { get { return map.heights; } }
 
-        System.Action UpdateMap;
+        protected System.Action UpdateMap;
+
+        public void SetUpdateMap(Action updateMapTexture)
+        {
+            UpdateMap = updateMapTexture;
+        }
 
         public struct MapData
         {
-            public float m_terrainWidth;
-            public float m_terrainHeight;
-            public float m_terrainLength;
+            public float terrain_width;
+            public float terrain_height;
+            public float terrain_length;
 
-            public int m_width;
-            public int m_height;
+            public int tex_width;
+            public int tex_height;
 
-            public float m_cellLength;
+            public float cell_length;
 
-            public float[] m_heights;
+            public float[] heights;
         }
 
         protected MapData map;
@@ -120,10 +126,10 @@ namespace TerrainTopology
         /// <returns></returns>
         protected float GetNormalizedHeight(int x, int y)
         {
-            x = math.clamp(x, 0, map.m_width - 1);
-            y = math.clamp(y, 0, map.m_height - 1);
+            x = math.clamp(x, 0, map.tex_width - 1);
+            y = math.clamp(y, 0, map.tex_height - 1);
 
-            return map.m_heights[x + y * map.m_width];
+            return map.heights[x + y * map.tex_width];
         }
 
         /// <summary>
@@ -134,7 +140,7 @@ namespace TerrainTopology
         /// <returns></returns>
         protected float GetHeight(int x, int y)
         {
-            return GetNormalizedHeight(x, y) * map.m_terrainHeight;
+            return GetNormalizedHeight(x, y) * map.terrain_height;
         }
 
         /// <summary>
@@ -145,7 +151,7 @@ namespace TerrainTopology
         /// <returns></returns>
         protected float2 GetFirstDerivative(int x, int y)
         {
-            float w = map.m_cellLength;
+            float w = map.cell_length;
             float z1 = GetHeight(x - 1, y + 1);
             float z2 = GetHeight(x + 0, y + 1);
             float z3 = GetHeight(x + 1, y + 1);
@@ -171,7 +177,7 @@ namespace TerrainTopology
         /// <param name="d2"></param>
         protected void GetDerivatives(int x, int y, out float2 d1, out float3 d2)
         {
-            float w = map.m_cellLength;
+            float w = map.cell_length;
             float w2 = w * w;
             float z1 = GetHeight(x - 1, y + 1);
             float z2 = GetHeight(x + 0, y + 1);
@@ -201,7 +207,7 @@ namespace TerrainTopology
         /// </summary>
         protected void SmoothHeightMap()
         {
-            var heights = new float[map.m_width * map.m_height];
+            var heights = new float[map.tex_width * map.tex_height];
 
             var gaussianKernel5 = new float[,]
             {
@@ -214,9 +220,9 @@ namespace TerrainTopology
 
             float gaussScale = 1.0f / 256.0f;
 
-            for (int y = 0; y < map.m_height; y++)
+            for (int y = 0; y < map.tex_height; y++)
             {
-                for (int x = 0; x < map.m_width; x++)
+                for (int x = 0; x < map.tex_width; x++)
                 {
                     float sum = 0;
 
@@ -231,11 +237,11 @@ namespace TerrainTopology
                         }
                     }
 
-                    heights[x + y * map.m_width] = sum;
+                    heights[x + y * map.tex_width] = sum;
                 }
             }
 
-            map.m_heights = heights;
+            map.heights = heights;
         }
 
         /// <summary>

@@ -8,7 +8,7 @@ namespace TerrainTopology
         DIFFERENCE, HORIZONTAL_EXCESS, VERTICAL_EXCESS, RING, ACCUMULATION
     };
 
-    public class CreateCurvatureMap : CreateTopology
+    public class CurvatureMap : Topology
     {
 
         public CURVATURE_TYPE m_curvatureType = CURVATURE_TYPE.HORIZONTAL;

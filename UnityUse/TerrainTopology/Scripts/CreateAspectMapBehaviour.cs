@@ -4,7 +4,7 @@
     {
         public new void Start()
         {
-            topology = new CreateAspectMap();
+            topology = new AspectMap();
             base.Start();
         }
     }

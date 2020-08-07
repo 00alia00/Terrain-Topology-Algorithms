@@ -5,7 +5,7 @@ namespace TerrainTopology
 {
     public enum RESIDUAL_TYPE { ELEVATION, MEAN, DIFFERENCE, STDEV, DEVIATION, PERCENTILE };
 
-    public class CreateResidualMap : CreateTopology
+    public class ResidualMap : Topology
     {
 
         public RESIDUAL_TYPE m_residualType = RESIDUAL_TYPE.PERCENTILE;

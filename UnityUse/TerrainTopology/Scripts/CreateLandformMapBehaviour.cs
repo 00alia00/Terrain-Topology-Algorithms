@@ -4,7 +4,7 @@
     {
         public new void Start()
         {
-            topology = new CreateLandformMap();
+            topology = new LandformMap();
             base.Start();
         }
     }

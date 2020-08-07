@@ -4,7 +4,7 @@
     {
         public new void Start()
         {
-            topology = new CreateSlopeMap();
+            topology = new SlopeMap();
             base.Start();
         }
     }

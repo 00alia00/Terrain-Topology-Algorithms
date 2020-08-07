@@ -4,7 +4,7 @@
     {
         public new void Start()
         {
-            topology = new CreateResidualMap();
+            topology = new ResidualMap();
             base.Start();
         }
     }

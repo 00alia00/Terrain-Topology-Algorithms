@@ -2,7 +2,7 @@
 
 namespace TerrainTopology
 {
-    public class CreateSlopeMap : CreateTopology
+    public class SlopeMap : Topology
     {
         protected override bool OnChange()
         {

@@ -2,7 +2,7 @@
 
 namespace TerrainTopology
 {
-    public class CreateNormalMap : CreateTopology
+    public class NormalMap : Topology
     {
         public override float4[] CreateMap()
         {

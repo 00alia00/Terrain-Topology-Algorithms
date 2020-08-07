@@ -2,7 +2,7 @@
 
 namespace TerrainTopology
 {
-    public class CreateFlowMap : CreateTopology
+    public class FlowMap : Topology
     {
         private const int LEFT = 0;
         private const int RIGHT = 1;

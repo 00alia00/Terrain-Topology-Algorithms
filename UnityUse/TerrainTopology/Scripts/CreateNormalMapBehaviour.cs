@@ -4,7 +4,7 @@
     {
         public new void Start()
         {
-            topology = new CreateNormalMap();
+            topology = new NormalMap();
             base.Start();
         }
     }

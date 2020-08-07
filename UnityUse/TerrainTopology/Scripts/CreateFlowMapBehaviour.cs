@@ -4,7 +4,7 @@
     {
         public new void Start()
         {
-            topology = new CreateFlowMap();
+            topology = new FlowMap();
             base.Start();
         }
     }
