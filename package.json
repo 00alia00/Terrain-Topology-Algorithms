@@ -1,0 +1,7 @@
+{
+  "name": "com.github.terraintopology",
+  "description": "An API that wraps Terrain-Topology-Algorithms",
+  "version": "1.0.0",
+  "unity": "2019.4",
+  "displayName": "TerrainTopology"
+}
