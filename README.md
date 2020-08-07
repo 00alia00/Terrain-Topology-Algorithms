@@ -1,4 +1,4 @@
-This fork is intended to pull out the unity specific code so that these algos can be used without unity in a seperate EXE. It will still run in unity as a package. (WIP)
+This fork is intended to pull out the unity specific code so that these algos can be used without unity in a seperate EXE. It will still run in unity as a package. 
 -- Alia
 
 # Terrain-Topology-Algorithms
